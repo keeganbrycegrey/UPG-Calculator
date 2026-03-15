@@ -317,3 +317,70 @@
     </p>
     <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
   </footer>
+  
+  <script>
+  let mode = 'raw';
+  function switchTab(m) {
+    mode = m;
+    document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active',(i===0&&m==='raw')||(i===1&&m==='z')));
+    document.getElementById('raw-panel').style.display = m==='raw'?'':'none';
+    document.getElementById('z-panel').style.display = m==='z'?'':'none';
+    compute();
+  }
+  function toggleEEAS(id) {
+    const cb = document.getElementById(id);
+    cb.checked = !cb.checked;
+    document.getElementById(id+'-item').classList.toggle('checked', cb.checked);
+    compute();
+  }
+  function v(id) { return parseFloat(document.getElementById(id).value) || 0; }
+  function compute() {
+    let zma, zrc, zlp, zsc;
+    if (mode === 'raw') {
+      const mn = v('sub-mean'), sd = v('sub-sd') || 1;
+      zma = (v('raw-ma') - mn) / sd; zrc = (v('raw-rc') - mn) / sd;
+      zlp = (v('raw-lp') - mn) / sd; zsc = (v('raw-sc') - mn) / sd;
+    } else { zma=v('z-ma'); zrc=v('z-rc'); zlp=v('z-lp'); zsc=v('z-sc'); }
+
+    const g8=v('g8'), g9=v('g9'), g10=v('g10'), g11=v('g11');
+    const hswa = (g8+g9+g10+g11)/4;
+    const zhs  = (hswa - 85) / 5;
+    document.getElementById('hswa-display').textContent = hswa.toFixed(2);
+    document.getElementById('zhswa-display').textContent = (zhs>=0?'+':'')+zhs.toFixed(3);
+
+    let upg = 2.8101
+      - 0.047147*zma
+      - 0.046402*zrc
+      - 0.1381  *zlp
+      - 0.15531 *zhs
+      - 0.025178*zsc*zlp*zhs;
+
+    let adj = 0;
+    if (document.getElementById('palugit').checked) adj -= 0.05;
+    if (document.getElementById('pabigat').checked) adj += 0.05;
+    upg += adj;
+
+    const c = Math.max(1.0, Math.min(5.0, upg));
+    const el = document.getElementById('upg-out');
+    el.classList.add('updating');
+    setTimeout(()=>{ el.textContent = c.toFixed(4); el.classList.remove('updating'); }, 60);
+
+    let label, color, bg;
+    if      (c<=1.5) { label='Highly competitive'; color='var(--success)'; bg='rgba(76,175,130,0.12)'; }
+    else if (c<=2.0) { label='Competitive';        color='var(--info)';    bg='rgba(92,168,226,0.12)'; }
+    else if (c<=2.5) { label='Average range';      color='var(--warning)'; bg='rgba(226,168,76,0.12)'; }
+    else             { label='Below typical cut-offs'; color='var(--danger)'; bg='rgba(226,92,92,0.12)'; }
+    document.getElementById('interp').innerHTML =
+      `<span class="status-pill" style="color:${color};background:${bg};border:0.5px solid ${color}33;">${label}</span>`;
+
+    const zVals=[{l:'Z_MA',v:zma},{l:'Z_RC',v:zrc},{l:'Z_LP',v:zlp},{l:'Z_SC',v:zsc},{l:'Z_HSWA',v:zhs}];
+    document.getElementById('breakdown').innerHTML = zVals.map(z=>{
+      const cls=z.v>0?'pos':z.v<0?'neg':'';
+      return `<div class="z-chip"><div class="z-chip-label">${z.l}</div><div class="z-chip-val ${cls}">${z.v>=0?'+':''}${z.v.toFixed(3)}</div></div>`;
+    }).join('');
+    document.getElementById('adj-display').innerHTML = adj!==0
+      ? `<div class="adj-row"><span>EEAS adjustment</span><span style="color:${adj<0?'var(--success)':'var(--danger)'};">${adj>0?'+':''}${adj.toFixed(2)}</span></div>` : '';
+  }
+  compute();
+</script>
+</body>
