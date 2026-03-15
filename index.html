@@ -71,3 +71,249 @@
   .formula-note { font-size: 11px; color: var(--text-dim); margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--border); line-height: 1.8; }
   .source-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
   .src { font-size: 10px; font-family: 'DM Mono', monospace; padding: 3px 8px; border-radius: 5px; background: rgba(92,168,226,0.1); color: var(--info); border: 0.5px solid rgba(92,168,226,0.25); }
+  
+  /* HSWA derivation */
+  .hswa-derived { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--bg-surface); border: 0.5px solid var(--border); border-radius: 10px; padding: 12px 16px; margin-top: 12px; }
+  .hswa-lhs { flex: 1; }
+  .hswa-label { font-size: 12px; color: var(--text-muted); }
+  .hswa-sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+  .hswa-val { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; color: var(--cream); text-align: right; }
+ 
+  /* EEAS */
+  details { margin-top: 1rem; }
+  summary { font-size: 12px; color: var(--text-dim); cursor: pointer; list-style: none; display: flex; align-items: center; gap: 6px; user-select: none; transition: color 0.15s; }
+  summary:hover { color: var(--text-muted); }
+  summary::before { content: '▸'; font-size: 10px; transition: transform 0.15s; }
+  details[open] summary::before { transform: rotate(90deg); }
+  .eeas-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 10px; border: 0.5px solid var(--border); margin-bottom: 8px; cursor: pointer; transition: background 0.15s, border-color 0.15s; background: var(--bg-surface); }
+  .eeas-item:hover { border-color: var(--border-hover); }
+  .eeas-item.checked { border-color: var(--maroon-muted); background: rgba(123,28,46,0.15); }
+  .eeas-item input[type="checkbox"] { display: none; }
+  .eeas-check { width: 18px; height: 18px; min-width: 18px; border: 0.5px solid var(--border-hover); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: transparent; transition: all 0.15s; background: var(--bg-input); margin-top: 1px; }
+  .eeas-item.checked .eeas-check { background: var(--maroon); border-color: var(--maroon-light); color: var(--cream); }
+  .eeas-info { flex: 1; }
+  .eeas-name { font-size: 13px; font-weight: 500; color: var(--cream); margin-bottom: 2px; }
+  .eeas-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+  .eeas-badge { font-family: 'DM Mono', monospace; font-size: 11px; padding: 2px 8px; border-radius: 5px; white-space: nowrap; align-self: flex-start; margin-top: 2px; }
+  .bg-good { background: rgba(76,175,130,0.15); color: var(--success); border: 0.5px solid rgba(76,175,130,0.3); }
+  .bg-bad { background: rgba(226,92,92,0.15); color: var(--danger); border: 0.5px solid rgba(226,92,92,0.3); }
+  .eeas-note { font-size: 11px; color: var(--text-dim); margin-top: 10px; line-height: 1.7; padding: 10px 12px; background: rgba(201,168,76,0.06); border: 0.5px solid rgba(201,168,76,0.15); border-radius: 8px; }
+ 
+  /* Result */
+  .result-card { background: linear-gradient(145deg, var(--maroon-deep), #1A0D14); border: 0.5px solid rgba(181,54,77,0.3); border-radius: 16px; padding: 2rem; margin-bottom: 1rem; position: relative; overflow: hidden; animation: fadeUp 0.4s ease both; animation-delay: 0.22s; }
+  .result-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(181,54,77,0.1), transparent 70%); pointer-events: none; }
+  .result-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+  .result-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(201,168,76,0.7); margin-bottom: 6px; }
+  .result-value { font-family: 'DM Serif Display', serif; font-size: 64px; line-height: 1; color: var(--cream); letter-spacing: -0.02em; transition: opacity 0.1s; }
+  .result-value.updating { opacity: 0.4; }
+  .result-scale { font-size: 18px; color: var(--text-muted); margin-left: 4px; }
+  .status-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 500; margin-top: 8px; }
+  .status-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+ 
+  /* Cutoff table */
+  .cutoff-wrap { min-width: 200px; }
+  .cutoff-head { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(201,168,76,0.6); margin-bottom: 8px; }
+  .cutoff-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 10px; border-radius: 6px; font-size: 12px; background: rgba(255,255,255,0.03); border: 0.5px solid var(--border); margin-bottom: 4px; }
+  .cutoff-campus { color: var(--text-muted); }
+  .cutoff-val { font-family: 'DM Mono', monospace; color: var(--cream); font-size: 12px; }
+  .cutoff-note { font-size: 10px; color: var(--text-dim); margin-top: 6px; line-height: 1.6; }
+ 
+  /* Z breakdown */
+  .breakdown { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 0.5px solid rgba(200,150,150,0.1); }
+  .breakdown-title { font-size: 10px; color: var(--text-dim); margin-bottom: 10px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; }
+  .z-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; }
+  .z-chip { background: rgba(255,255,255,0.04); border: 0.5px solid var(--border); border-radius: 8px; padding: 8px 10px; }
+  .z-chip-label { font-size: 10px; color: var(--text-dim); margin-bottom: 3px; font-family: 'DM Mono', monospace; }
+  .z-chip-val { font-size: 14px; font-family: 'DM Mono', monospace; color: var(--cream); font-weight: 500; }
+  .z-chip-val.pos { color: var(--success); }
+  .z-chip-val.neg { color: var(--danger); }
+  .adj-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(123,28,46,0.15); border: 0.5px solid rgba(181,54,77,0.2); border-radius: 8px; margin-top: 12px; font-size: 13px; }
+  .adj-row span:first-child { color: var(--text-muted); }
+  .adj-row span:last-child { font-family: 'DM Mono', monospace; font-weight: 500; }
+ 
+  /* Deploy banner */
+  .deploy-banner { background: var(--bg-surface); border: 0.5px solid var(--border); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; animation: fadeUp 0.4s ease both; animation-delay: 0.26s; }
+  .deploy-banner h3 { font-size: 13px; font-weight: 500; color: var(--cream); margin-bottom: 8px; }
+  .deploy-options { display: flex; flex-wrap: wrap; gap: 8px; }
+  .deploy-opt { font-size: 12px; padding: 7px 14px; border-radius: 8px; border: 0.5px solid var(--border); background: var(--bg-card); color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+  .deploy-opt strong { color: var(--cream); font-weight: 500; }
+  .deploy-opt .tag { font-family: 'DM Mono', monospace; font-size: 10px; padding: 1px 6px; border-radius: 4px; background: rgba(76,175,130,0.12); color: var(--success); border: 0.5px solid rgba(76,175,130,0.25); }
+ 
+  footer { text-align: center; margin-top: 1.5rem; font-size: 11px; color: var(--text-dim); line-height: 1.9; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+<div class="noise"></div>
+<div class="page">
+ 
+  <header>
+    <div class="eyebrow">University of the Philippines - UPCAT</div>
+    <h1>UPG <span>Calculator</span></h1>
+    <p class="header-sub">Estimate your University Predicted Grade from UPCAT scores and HS grades.<br>This is unofficial and for reference/estimation only.</p>
+        <p class="header-sub">Created by:<br>Keegan Bryce P. Abeja - 11 STEM Francium</p>
+  </header>
+ 
+  <!-- Formula -->
+  <div class="card">
+    <div class="card-title">Formula &amp; methodology</div>
+    <div class="formula-box">
+      <div class="formula-text">
+        UPG = <span class="k">2.8101</span>
+        − <span class="w">0.047147</span>·<span class="z">Z<sub>MA</sub></span>
+        − <span class="w">0.046402</span>·<span class="z">Z<sub>RC</sub></span>
+        − <span class="w">0.1381</span>·<span class="z">Z<sub>LP</sub></span><br>
+        &emsp;&emsp;&emsp;&emsp;&emsp;− <span class="w">0.15531</span>·<span class="z">Z<sub>HSWA</sub></span>
+        − <span class="w">0.025178</span>·<span class="z">Z<sub>SC</sub></span>·<span class="z">Z<sub>LP</sub></span>·<span class="z">Z<sub>HSWA</sub></span>
+      </div>
+      <div class="formula-note">
+        UPCAT subtest Z-scores: (raw score − mean) ÷ SD, using estimated population params (see advanced).<br>
+        HSWA standardization: <strong style="color:var(--cream);font-weight:500;">Z<sub>HSWA</sub> = (HSWA − 85) ÷ 5</strong><br>
+        HSWA = Final grades in Grades 8, 9, 10, and 11.<br>
+        EEAS: palugit = −0.05 · pabigat = +0.05.<br>
+        DISCLAIMER: ⚠ UP internally transmutes HS grades (160+ school systems) - your self-reported HSWA may differ from what UP uses for its calculations.
+      </div>
+    </div>
+    <div class="source-row">
+      <span class="src">Manlapaz 1976</span>
+      <span class="src">upcatreview.com/upg</span>
+      <span class="src">upcatreview.com/tale-of-two</span>
+      <span class="src">studylib UPAI paper</span>
+      <span class="src">upcat.up.edu.ph</span>
+      <span class="src">filipiknow.net</span>
+    </div>
+  </div>
+ 
+  <!-- UPCAT Scores -->
+  <div class="card">
+    <div class="card-title">UPCAT subtest scores</div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('raw')">Raw scores (%)</button>
+      <button class="tab" onclick="switchTab('z')">Z-scores (direct)</button>
+    </div>
+    <div id="raw-panel">
+      <div class="fg fg-2">
+        <div class="field"><label>Mathematics</label><input type="number" id="raw-ma" min="0" max="100" value="60" step="0.1" oninput="compute()"></div>
+        <div class="field"><label>Reading comprehension</label><input type="number" id="raw-rc" min="0" max="100" value="60" step="0.1" oninput="compute()"></div>
+        <div class="field"><label>Language proficiency</label><input type="number" id="raw-lp" min="0" max="100" value="60" step="0.1" oninput="compute()"></div>
+        <div class="field"><label>Science</label><input type="number" id="raw-sc" min="0" max="100" value="60" step="0.1" oninput="compute()"></div>
+      </div>
+      <details>
+        <summary>Subtest standardization parameters (advanced)</summary>
+        <div style="margin-top:12px;">
+          <div class="fg fg-2">
+            <div class="field"><label>Population mean (default 50)</label><input type="number" id="sub-mean" value="50" step="0.1" oninput="compute()"></div>
+            <div class="field"><label>Population SD (default 15)</label><input type="number" id="sub-sd" value="15" step="0.1" oninput="compute()"></div>
+          </div>
+        </div>
+      </details>
+    </div>
+    <div id="z-panel" style="display:none;">
+      <div class="fg fg-2">
+        <div class="field"><label>Z_MA · Mathematics</label><input type="number" id="z-ma" value="0.67" step="0.01" oninput="compute()"></div>
+        <div class="field"><label>Z_RC · Reading comp.</label><input type="number" id="z-rc" value="0.67" step="0.01" oninput="compute()"></div>
+        <div class="field"><label>Z_LP · Language prof.</label><input type="number" id="z-lp" value="0.67" step="0.01" oninput="compute()"></div>
+        <div class="field"><label>Z_SC · Science</label><input type="number" id="z-sc" value="0.67" step="0.01" oninput="compute()"></div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- HSWA -->
+  <div class="card">
+    <div class="card-title">High school weighted average (HSWA)</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:1.25rem;line-height:1.7;">
+      Enter your final grade per year. HSWA = average of all four, then standardized as <span style="font-family:'DM Mono',monospace;color:var(--cream);font-size:12px;">(HSWA − 85) ÷ 5</span>.
+    </p>
+    <div class="fg fg-4">
+      <div class="field"><label>Grade 8</label><input type="number" id="g8" min="60" max="100" value="90" step="0.01" oninput="compute()"></div>
+      <div class="field"><label>Grade 9</label><input type="number" id="g9" min="60" max="100" value="90" step="0.01" oninput="compute()"></div>
+      <div class="field"><label>Grade 10</label><input type="number" id="g10" min="60" max="100" value="90" step="0.01" oninput="compute()"></div>
+      <div class="field"><label>Grade 11</label><input type="number" id="g11" min="60" max="100" value="90" step="0.01" oninput="compute()"></div>
+    </div>
+    <div class="hswa-derived">
+      <div class="hswa-lhs">
+        <div class="hswa-label">Computed HSWA</div>
+        <div class="hswa-sub">Simple average of Grades 8–11</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="hswa-val" id="hswa-display">90.00</div>
+        <div class="hswa-sub">Z<sub>HSWA</sub> = <span id="zhswa-display">+1.000</span></div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--text-dim);margin-top:12px;line-height:1.7;">
+      Pre-K12: enter Grades 7 (Yr 1), 8 (Yr 2), 9 (Yr 3) in the first three fields and repeat Grade 9 in the last, or use the same averaged value across all four.
+    </p>
+  </div>
+ 
+  <!-- EEAS -->
+  <div class="card">
+    <div class="card-title">EEAS adjustments (since 1996)</div>
+    <label class="eeas-item" id="palugit-item" onclick="toggleEEAS('palugit')">
+      <input type="checkbox" id="palugit">
+      <div class="eeas-check" id="palugit-check">✓</div>
+      <div class="eeas-info">
+        <div class="eeas-name">Palugit</div>
+        <div class="eeas-desc">Attended a public general HS, vocational school, or barangay national HS - excludes SUC-HSs and science high schools</div>
+      </div>
+      <span class="eeas-badge bg-good">−0.05</span>
+    </label>
+    <label class="eeas-item" id="pabigat-item" onclick="toggleEEAS('pabigat')">
+      <input type="checkbox" id="pabigat">
+      <div class="eeas-check" id="pabigat-check">✓</div>
+      <div class="eeas-info">
+        <div class="eeas-name">Pabigat</div>
+        <div class="eeas-desc">Second-choice campus is a UP campus outside your home region</div>
+      </div>
+      <span class="eeas-badge bg-bad">+0.05</span>
+    </label>
+    <div class="eeas-note">
+      Source: UP Forum "Excellence and Equity" article and "A Tale of Two Applicants" (upcatreview.com) confirm palugit and pabigat are both <strong style="color:var(--cream);font-weight:500;">0.05</strong>, not 0.5 as commonly seen online.
+    </div>
+  </div>
+ 
+  <!-- Result -->
+  <div class="result-card">
+    <div class="result-top">
+      <div>
+        <div class="result-label">Estimated UPG</div>
+        <div>
+          <span class="result-value" id="upg-out">—</span>
+          <span class="result-scale">/ 5.0</span>
+        </div>
+        <div id="interp"></div>
+      </div>
+      <div class="cutoff-wrap">
+        <div class="cutoff-head">AY 2025–26 appeal cutoffs</div>
+        <div class="cutoff-row"><span class="cutoff-campus">UP Diliman</span><span class="cutoff-val" style="color:var(--text-dim);">No Appeals</span></div>
+        <div class="cutoff-row"><span class="cutoff-campus">UP Manila</span><span class="cutoff-val">≤ 2.580</span></div>
+        <div class="cutoff-row"><span class="cutoff-campus">UP Pampanga</span><span class="cutoff-val">≤ 2.600</span></div>
+        <div class="cutoff-row"><span class="cutoff-campus">UP Baguio</span><span class="cutoff-val">≤ 2.700</span></div>
+        <div class="cutoff-row"><span class="cutoff-campus">UP Cebu</span><span class="cutoff-val">≤ 2.700</span></div>
+        <div class="cutoff-row"><span class="cutoff-campus">UP Visayas</span><span class="cutoff-val">≤ 2.700</span></div>
+        <div class="cutoff-row"><span class="cutoff-campus">UP Tacloban</span><span class="cutoff-val">≤ 2.749</span></div>
+        <div class="cutoff-row"><span class="cutoff-campus">UPLB<br>UPMin / UPOU</span><span class="cutoff-val">≤ 2.800</span></div>
+        <div class="cutoff-note">These are <em>appeal</em> cutoffs.<br>Qualification cutoffs are stricter &amp; not public.<br>Source: up.edu.ph</div>
+      </div>
+    </div>
+    <div class="breakdown">
+      <div class="breakdown-title">Z-score breakdown</div>
+      <div class="z-grid" id="breakdown"></div>
+      <div id="adj-display"></div>
+    </div>
+  </div>
+ 
+  <footer>
+    <p>Formula: Manlapaz (1976) · HSWA standardization &amp; EEAS values: upcatreview.com / UP Forum</p>
+    <p>Grade levels: upcat.up.edu.ph · 2025 appeal cutoffs: PhilStar Life (June 18, 2025)</p>
+    <p style="margin-top:4px;">Not affiliated with the University of the Philippines. Calculations are unofficial estimates based on public knowledge - actual UPG computed by UP may differ.</p>
+    <p style="margin-top:8px;">
+      &copy; <span id="yr"></span> · Free to use and share · 
+      <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" 
+         style="color:var(--text-dim);text-decoration:underline;text-decoration-color:var(--border);">
+        CC BY-NC 4.0
+      </a>
+       · Not for commercial use
+    </p>
+    <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+  </footer>
