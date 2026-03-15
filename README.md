@@ -25,7 +25,7 @@ You are free to:
 - Adapt or build on it non-commercially
 
 This may **not** be:
-- Used it in a commercial product or service.
+- Used in a commercial product or service.
 - Attribution removed/obscured.
 
 Please credit this/link back the repository if you fork or adapt this project. 
