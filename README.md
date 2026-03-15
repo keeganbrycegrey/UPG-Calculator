@@ -7,7 +7,7 @@ By: Keegan Bryce P. Abeja
 
 ## How to Use
 
-1. Open the [live site](TO FOLLOW)
+1. Open the [live site] https://upg-calculator.netlify.app/
 2. Enter your UPCAT mocktest/predicted subtest scores (Mathematics, Reading Comprehension, Language Proficiency, Science) as percentages, or switch to Z-scores if you have them
 3. Enter your final grades for Grades 8, 9, 10, and 11, the HSWA and Z_HSWA are computed automatically
 4. Check the EEAS boxes if applicable (palugit or pabigat)
