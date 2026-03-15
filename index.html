@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UPG Calculator - UPCAT Estimator</title>
-<meta name="description" content="Estimate your University of the Philippines University Predicted Grade (UPG) from your UPCAT scores and high school grades. This is unofficia and for reference only.">
+<meta name="description" content="Estimate your University of the Philippines University Predicted Grade (UPG) from your UPCAT scores and high school grades. This is unofficial and for reference only.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -29,62 +29,69 @@
     opacity: 0.5;
   }
   .page { position: relative; z-index: 1; width: 100%; max-width: 680px; }
- 
+
   /* Header */
   header { text-align: center; margin-bottom: 3rem; padding-top: 1rem; }
   .eyebrow { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; opacity: 0.85; }
   h1 { font-family: 'DM Serif Display', serif; font-size: clamp(2.2rem, 6vw, 3.2rem); font-weight: 400; color: var(--cream); line-height: 1.1; }
   h1 span { color: var(--maroon-light); }
   .header-sub { margin-top: 0.75rem; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
- 
+
   /* Cards */
   .card { background: var(--bg-card); border: 0.5px solid var(--border); border-radius: 16px; padding: 1.75rem; margin-bottom: 1rem; transition: border-color 0.2s; animation: fadeUp 0.4s ease both; }
   .card:hover { border-color: var(--border-hover); }
-  .card:nth-child(2) { animation-delay: 0.04s; }
-  .card:nth-child(3) { animation-delay: 0.08s; }
-  .card:nth-child(4) { animation-delay: 0.12s; }
-  .card:nth-child(5) { animation-delay: 0.16s; }
+  .card:nth-child(2){animation-delay:.04s} .card:nth-child(3){animation-delay:.08s}
+  .card:nth-child(4){animation-delay:.12s} .card:nth-child(5){animation-delay:.16s}
   .card-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 1.25rem; }
+
   /* Tabs */
   .tabs { display: flex; gap: 6px; background: var(--bg-surface); padding: 4px; border-radius: 10px; margin-bottom: 1.5rem; }
-  .tab { flex: 1; padding: 8px 12px; font-size: 13px; font-family: 'DM Sans', sans-serif; border: none; border-radius: 7px; cursor: pointer; transition: all 0.18s; background: transparent; color: var(--text-muted); font-weight: 400; }
+  .tab { flex: 1; padding: 8px 10px; font-size: 12px; font-family: 'DM Sans', sans-serif; border: none; border-radius: 7px; cursor: pointer; transition: all 0.18s; background: transparent; color: var(--text-muted); font-weight: 400; text-align: center; }
   .tab.active { background: var(--bg-card); color: var(--cream); font-weight: 500; border: 0.5px solid var(--border-hover); }
- 
+
   /* Fields */
   .fg { display: grid; gap: 12px; margin-bottom: 12px; }
   .fg-2 { grid-template-columns: 1fr 1fr; }
   .fg-4 { grid-template-columns: repeat(4, 1fr); }
-  @media (max-width: 520px) { .fg-2 { grid-template-columns: 1fr; } .fg-4 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .fg-2{grid-template-columns:1fr} .fg-4{grid-template-columns:1fr 1fr} }
   .field { display: flex; flex-direction: column; gap: 6px; }
   .field label { font-size: 12px; color: var(--text-muted); }
   .field input[type="number"] { background: var(--bg-input); border: 0.5px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 14px; font-family: 'DM Mono', monospace; color: var(--cream); outline: none; transition: border-color 0.18s, background 0.18s; width: 100%; -moz-appearance: textfield; }
   .field input[type="number"]::-webkit-inner-spin-button, .field input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
   .field input[type="number"]:focus { border-color: var(--maroon-light); background: var(--bg-surface); }
-  .sec-label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin: 1.25rem 0 0.75rem; }
- 
+  .z-derived { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--text-dim); padding: 3px 8px; background: var(--bg-surface); border-radius: 5px; display: inline-block; }
+  .z-derived.pos { color: var(--success); }
+  .z-derived.neg { color: var(--danger); }
+
   /* Formula */
   .formula-box { background: var(--bg-surface); border: 0.5px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 1.25rem; }
   .formula-text { font-family: 'DM Mono', monospace; font-size: 11.5px; color: var(--text-muted); line-height: 2.2; }
-  .formula-text .k { color: var(--gold); }
-  .formula-text .w { color: var(--maroon-light); }
-  .formula-text .z { color: var(--info); }
+  .formula-text .k{color:var(--gold)} .formula-text .w{color:var(--maroon-light)} .formula-text .z{color:var(--info)}
   .formula-note { font-size: 11px; color: var(--text-dim); margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--border); line-height: 1.8; }
   .source-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
   .src { font-size: 10px; font-family: 'DM Mono', monospace; padding: 3px 8px; border-radius: 5px; background: rgba(92,168,226,0.1); color: var(--info); border: 0.5px solid rgba(92,168,226,0.25); }
-  
-  /* HSWA derivation */
+
+  /* Accuracy banners */
+  .accuracy-banner { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border-radius: 10px; margin-bottom: 1.25rem; font-size: 12px; line-height: 1.6; }
+  .accuracy-banner.good { background: rgba(76,175,130,0.08); border: 0.5px solid rgba(76,175,130,0.25); color: #7bcfaa; }
+  .accuracy-banner.warn { background: rgba(226,168,76,0.08); border: 0.5px solid rgba(226,168,76,0.25); color: #d4a84c; }
+  .accuracy-banner .icon { font-size: 14px; margin-top: 1px; flex-shrink: 0; }
+
+  /* HSWA derived */
   .hswa-derived { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--bg-surface); border: 0.5px solid var(--border); border-radius: 10px; padding: 12px 16px; margin-top: 12px; }
   .hswa-lhs { flex: 1; }
   .hswa-label { font-size: 12px; color: var(--text-muted); }
   .hswa-sub { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
   .hswa-val { font-family: 'DM Mono', monospace; font-size: 20px; font-weight: 500; color: var(--cream); text-align: right; }
- 
-  /* EEAS */
+
+  /* Details / summary */
   details { margin-top: 1rem; }
   summary { font-size: 12px; color: var(--text-dim); cursor: pointer; list-style: none; display: flex; align-items: center; gap: 6px; user-select: none; transition: color 0.15s; }
   summary:hover { color: var(--text-muted); }
   summary::before { content: '▸'; font-size: 10px; transition: transform 0.15s; }
   details[open] summary::before { transform: rotate(90deg); }
+
+  /* EEAS */
   .eeas-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 10px; border: 0.5px solid var(--border); margin-bottom: 8px; cursor: pointer; transition: background 0.15s, border-color 0.15s; background: var(--bg-surface); }
   .eeas-item:hover { border-color: var(--border-hover); }
   .eeas-item.checked { border-color: var(--maroon-muted); background: rgba(123,28,46,0.15); }
@@ -96,9 +103,9 @@
   .eeas-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
   .eeas-badge { font-family: 'DM Mono', monospace; font-size: 11px; padding: 2px 8px; border-radius: 5px; white-space: nowrap; align-self: flex-start; margin-top: 2px; }
   .bg-good { background: rgba(76,175,130,0.15); color: var(--success); border: 0.5px solid rgba(76,175,130,0.3); }
-  .bg-bad { background: rgba(226,92,92,0.15); color: var(--danger); border: 0.5px solid rgba(226,92,92,0.3); }
+  .bg-bad  { background: rgba(226,92,92,0.15);  color: var(--danger);  border: 0.5px solid rgba(226,92,92,0.3); }
   .eeas-note { font-size: 11px; color: var(--text-dim); margin-top: 10px; line-height: 1.7; padding: 10px 12px; background: rgba(201,168,76,0.06); border: 0.5px solid rgba(201,168,76,0.15); border-radius: 8px; }
- 
+
   /* Result */
   .result-card { background: linear-gradient(145deg, var(--maroon-deep), #1A0D14); border: 0.5px solid rgba(181,54,77,0.3); border-radius: 16px; padding: 2rem; margin-bottom: 1rem; position: relative; overflow: hidden; animation: fadeUp 0.4s ease both; animation-delay: 0.22s; }
   .result-card::before { content: ''; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(181,54,77,0.1), transparent 70%); pointer-events: none; }
@@ -109,15 +116,15 @@
   .result-scale { font-size: 18px; color: var(--text-muted); margin-left: 4px; }
   .status-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 500; margin-top: 8px; }
   .status-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
- 
+
   /* Cutoff table */
-  .cutoff-wrap { min-width: 200px; }
+  .cutoff-wrap { min-width: 190px; }
   .cutoff-head { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(201,168,76,0.6); margin-bottom: 8px; }
-  .cutoff-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 10px; border-radius: 6px; font-size: 12px; background: rgba(255,255,255,0.03); border: 0.5px solid var(--border); margin-bottom: 4px; }
+  .cutoff-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 10px; border-radius: 6px; font-size: 11px; background: rgba(255,255,255,0.03); border: 0.5px solid var(--border); margin-bottom: 4px; }
   .cutoff-campus { color: var(--text-muted); }
-  .cutoff-val { font-family: 'DM Mono', monospace; color: var(--cream); font-size: 12px; }
+  .cutoff-val { font-family: 'DM Mono', monospace; color: var(--cream); }
   .cutoff-note { font-size: 10px; color: var(--text-dim); margin-top: 6px; line-height: 1.6; }
- 
+
   /* Z breakdown */
   .breakdown { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 0.5px solid rgba(200,150,150,0.1); }
   .breakdown-title { font-size: 10px; color: var(--text-dim); margin-bottom: 10px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -125,36 +132,31 @@
   .z-chip { background: rgba(255,255,255,0.04); border: 0.5px solid var(--border); border-radius: 8px; padding: 8px 10px; }
   .z-chip-label { font-size: 10px; color: var(--text-dim); margin-bottom: 3px; font-family: 'DM Mono', monospace; }
   .z-chip-val { font-size: 14px; font-family: 'DM Mono', monospace; color: var(--cream); font-weight: 500; }
-  .z-chip-val.pos { color: var(--success); }
-  .z-chip-val.neg { color: var(--danger); }
+  .z-chip-val.pos{color:var(--success)} .z-chip-val.neg{color:var(--danger)}
   .adj-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(123,28,46,0.15); border: 0.5px solid rgba(181,54,77,0.2); border-radius: 8px; margin-top: 12px; font-size: 13px; }
   .adj-row span:first-child { color: var(--text-muted); }
   .adj-row span:last-child { font-family: 'DM Mono', monospace; font-weight: 500; }
- 
-  /* Deploy banner */
-  .deploy-banner { background: var(--bg-surface); border: 0.5px solid var(--border); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; animation: fadeUp 0.4s ease both; animation-delay: 0.26s; }
-  .deploy-banner h3 { font-size: 13px; font-weight: 500; color: var(--cream); margin-bottom: 8px; }
-  .deploy-options { display: flex; flex-wrap: wrap; gap: 8px; }
-  .deploy-opt { font-size: 12px; padding: 7px 14px; border-radius: 8px; border: 0.5px solid var(--border); background: var(--bg-card); color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
-  .deploy-opt strong { color: var(--cream); font-weight: 500; }
-  .deploy-opt .tag { font-family: 'DM Mono', monospace; font-size: 10px; padding: 1px 6px; border-radius: 4px; background: rgba(76,175,130,0.12); color: var(--success); border: 0.5px solid rgba(76,175,130,0.25); }
- 
-  footer { text-align: center; margin-top: 1.5rem; font-size: 11px; color: var(--text-dim); line-height: 1.9; }
 
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  footer { text-align: center; margin-top: 1.5rem; font-size: 11px; color: var(--text-dim); line-height: 1.9; }
+  footer a { color: var(--text-dim); text-decoration: underline; text-decoration-color: var(--border); }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
 </style>
 </head>
 <body>
 <div class="noise"></div>
 <div class="page">
- 
+
   <header>
+    <img src="https://upload.wikimedia.org/wikipedia/en/3/3d/University_of_The_Philippines_seal.svg" 
+     alt="University of the Philippines Seal" 
+     style="width:90px;height:90px;margin-bottom:1.25rem;opacity:0.9;">
     <div class="eyebrow">University of the Philippines - UPCAT</div>
     <h1>UPG <span>Calculator</span></h1>
     <p class="header-sub">Estimate your University Predicted Grade from UPCAT scores and HS grades.<br>This is unofficial and for reference/estimation only.</p>
-        <p class="header-sub">Created by:<br>Keegan Bryce P. Abeja - 11 STEM Francium</p>
+    <p class="header-sub">Created by:<br>Keegan Bryce P. Abeja - 11 STEM Francium</p>
   </header>
- 
+
   <!-- Formula -->
   <div class="card">
     <div class="card-title">Formula &amp; methodology</div>
@@ -168,7 +170,7 @@
         − <span class="w">0.025178</span>·<span class="z">Z<sub>SC</sub></span>·<span class="z">Z<sub>LP</sub></span>·<span class="z">Z<sub>HSWA</sub></span>
       </div>
       <div class="formula-note">
-        UPCAT subtest Z-scores: (raw score − mean) ÷ SD, using estimated population params (see advanced).<br>
+        UPCAT subtest Z-scores: computed from percentile ranks (most accurate), raw scores (approximate), or entered directly.<br>
         HSWA standardization: <strong style="color:var(--cream);font-weight:500;">Z<sub>HSWA</sub> = (HSWA − 85) ÷ 5</strong><br>
         HSWA = Final grades in Grades 8, 9, 10, and 11.<br>
         EEAS: palugit = −0.05 · pabigat = +0.05.<br>
@@ -184,15 +186,53 @@
       <span class="src">filipiknow.net</span>
     </div>
   </div>
- 
+
   <!-- UPCAT Scores -->
   <div class="card">
     <div class="card-title">UPCAT subtest scores</div>
     <div class="tabs">
-      <button class="tab active" onclick="switchTab('raw')">Raw scores (%)</button>
+      <button class="tab active" onclick="switchTab('pct')">Percentile ranks</button>
+      <button class="tab" onclick="switchTab('raw')">Raw scores (%)</button>
       <button class="tab" onclick="switchTab('z')">Z-scores (direct)</button>
     </div>
-    <div id="raw-panel">
+
+    <!-- Percentile panel -->
+    <div id="pct-panel">
+      <div class="accuracy-banner good">
+        <span class="icon">✓</span>
+        <span>This may give you the most accurate estimation. As UP converts to Z-scores via inverse normal distribution.</span>
+      </div>
+      <div class="fg fg-2">
+        <div class="field">
+          <label>Mathematics percentile</label>
+          <input type="number" id="pct-ma" min="1" max="99" value="70" step="1" oninput="compute()">
+          <span class="z-derived" id="zdpct-ma">Z = —</span>
+        </div>
+        <div class="field">
+          <label>Reading comprehension percentile</label>
+          <input type="number" id="pct-rc" min="1" max="99" value="70" step="1" oninput="compute()">
+          <span class="z-derived" id="zdpct-rc">Z = —</span>
+        </div>
+        <div class="field">
+          <label>Language proficiency percentile</label>
+          <input type="number" id="pct-lp" min="1" max="99" value="70" step="1" oninput="compute()">
+          <span class="z-derived" id="zdpct-lp">Z = —</span>
+        </div>
+        <div class="field">
+          <label>Science percentile</label>
+          <input type="number" id="pct-sc" min="1" max="99" value="70" step="1" oninput="compute()">
+          <span class="z-derived" id="zdpct-sc">Z = —</span>
+        </div>
+      </div>
+      <p style="font-size:11px;color:var(--text-dim);line-height:1.7;">Enter the percentile ranks shown on your UP Office of Admissions score slip (1–99).</p>
+    </div>
+
+    <!-- Raw score panel -->
+    <div id="raw-panel" style="display:none;">
+      <div class="accuracy-banner warn">
+        <span class="icon">⚠</span>
+        <span>Approximate - requires assumed population mean &amp; SD, which UP does not publish. Use percentile ranks for better accuracy.</span>
+      </div>
       <div class="fg fg-2">
         <div class="field"><label>Mathematics</label><input type="number" id="raw-ma" min="0" max="100" value="60" step="0.1" oninput="compute()"></div>
         <div class="field"><label>Reading comprehension</label><input type="number" id="raw-rc" min="0" max="100" value="60" step="0.1" oninput="compute()"></div>
@@ -209,16 +249,22 @@
         </div>
       </details>
     </div>
+
+    <!-- Z-score direct panel -->
     <div id="z-panel" style="display:none;">
+      <div class="accuracy-banner good">
+        <span class="icon">✓</span>
+        <span>Exact - this may only be used if UP provided your actual standardized scores directly.</span>
+      </div>
       <div class="fg fg-2">
-        <div class="field"><label>Z_MA · Mathematics</label><input type="number" id="z-ma" value="0.67" step="0.01" oninput="compute()"></div>
-        <div class="field"><label>Z_RC · Reading comp.</label><input type="number" id="z-rc" value="0.67" step="0.01" oninput="compute()"></div>
-        <div class="field"><label>Z_LP · Language prof.</label><input type="number" id="z-lp" value="0.67" step="0.01" oninput="compute()"></div>
-        <div class="field"><label>Z_SC · Science</label><input type="number" id="z-sc" value="0.67" step="0.01" oninput="compute()"></div>
+        <div class="field"><label>Z_MA · Mathematics</label><input type="number" id="z-ma" value="0.52" step="0.01" oninput="compute()"></div>
+        <div class="field"><label>Z_RC · Reading comp.</label><input type="number" id="z-rc" value="0.52" step="0.01" oninput="compute()"></div>
+        <div class="field"><label>Z_LP · Language prof.</label><input type="number" id="z-lp" value="0.52" step="0.01" oninput="compute()"></div>
+        <div class="field"><label>Z_SC · Science</label><input type="number" id="z-sc" value="0.52" step="0.01" oninput="compute()"></div>
       </div>
     </div>
   </div>
- 
+
   <!-- HSWA -->
   <div class="card">
     <div class="card-title">High school weighted average (HSWA)</div>
@@ -245,7 +291,7 @@
       Pre-K12: enter Grades 7 (Yr 1), 8 (Yr 2), 9 (Yr 3) in the first three fields and repeat Grade 9 in the last, or use the same averaged value across all four.
     </p>
   </div>
- 
+
   <!-- EEAS -->
   <div class="card">
     <div class="card-title">EEAS adjustments (since 1996)</div>
@@ -271,7 +317,7 @@
       Source: UP Forum "Excellence and Equity" article and "A Tale of Two Applicants" (upcatreview.com) confirm palugit and pabigat are both <strong style="color:var(--cream);font-weight:500;">0.05</strong>, not 0.5 as commonly seen online.
     </div>
   </div>
- 
+
   <!-- Result -->
   <div class="result-card">
     <div class="result-top">
@@ -302,58 +348,99 @@
       <div id="adj-display"></div>
     </div>
   </div>
- 
+
   <footer>
     <p>Formula: Manlapaz (1976) · HSWA standardization &amp; EEAS values: upcatreview.com / UP Forum</p>
     <p>Grade levels: upcat.up.edu.ph · 2025 appeal cutoffs: PhilStar Life (June 18, 2025)</p>
     <p style="margin-top:4px;">Not affiliated with the University of the Philippines. Calculations are unofficial estimates based on public knowledge - actual UPG computed by UP may differ.</p>
     <p style="margin-top:8px;">
-      &copy; <span id="yr"></span> · Free to use and share · 
-      <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" 
-         style="color:var(--text-dim);text-decoration:underline;text-decoration-color:var(--border);">
-        CC BY-NC 4.0
-      </a>
+      &copy; <span id="yr"></span> · Free to use and share ·
+      <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
        · Not for commercial use
     </p>
     <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
   </footer>
-  
-  <script>
-  let mode = 'raw';
+
+</div>
+<script>
+  let mode = 'pct';
+
   function switchTab(m) {
     mode = m;
-    document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active',(i===0&&m==='raw')||(i===1&&m==='z')));
+    document.querySelectorAll('.tab').forEach((t,i) =>
+      t.classList.toggle('active',(i===0&&m==='pct')||(i===1&&m==='raw')||(i===2&&m==='z'))
+    );
+    document.getElementById('pct-panel').style.display = m==='pct'?'':'none';
     document.getElementById('raw-panel').style.display = m==='raw'?'':'none';
-    document.getElementById('z-panel').style.display = m==='z'?'':'none';
+    document.getElementById('z-panel').style.display   = m==='z'  ?'':'none';
     compute();
   }
+
   function toggleEEAS(id) {
     const cb = document.getElementById(id);
     cb.checked = !cb.checked;
     document.getElementById(id+'-item').classList.toggle('checked', cb.checked);
     compute();
   }
+
   function v(id) { return parseFloat(document.getElementById(id).value) || 0; }
+
+  // Rational approximation of inverse normal CDF (Abramowitz & Stegun 26.2.17)
+  function invNorm(p) {
+    if (p <= 0) return -4; if (p >= 1) return 4;
+    const c = [2.515517, 0.802853, 0.010328];
+    const d = [1.432788, 0.189269, 0.001308];
+    function inner(t) {
+      return t - (c[0]+c[1]*t+c[2]*t*t) / (1+d[0]*t+d[1]*t*t+d[2]*t*t*t);
+    }
+    if (p < 0.5) return -inner(Math.sqrt(-2*Math.log(p)));
+    return inner(Math.sqrt(-2*Math.log(1-p)));
+  }
+
+  function fmtZ(z) {
+    const str = (z >= 0 ? '+' : '') + z.toFixed(3);
+    const cls = z > 0 ? 'pos' : z < 0 ? 'neg' : '';
+    return { str, cls };
+  }
+
+  function updateDerived(id, z) {
+    const el = document.getElementById('zdpct-' + id);
+    if (!el) return;
+    const { str, cls } = fmtZ(z);
+    el.textContent = 'Z = ' + str;
+    el.className = 'z-derived' + (cls ? ' ' + cls : '');
+  }
+
   function compute() {
     let zma, zrc, zlp, zsc;
-    if (mode === 'raw') {
+
+    if (mode === 'pct') {
+      zma = invNorm(v('pct-ma') / 100);
+      zrc = invNorm(v('pct-rc') / 100);
+      zlp = invNorm(v('pct-lp') / 100);
+      zsc = invNorm(v('pct-sc') / 100);
+      updateDerived('ma', zma); updateDerived('rc', zrc);
+      updateDerived('lp', zlp); updateDerived('sc', zsc);
+    } else if (mode === 'raw') {
       const mn = v('sub-mean'), sd = v('sub-sd') || 1;
       zma = (v('raw-ma') - mn) / sd; zrc = (v('raw-rc') - mn) / sd;
       zlp = (v('raw-lp') - mn) / sd; zsc = (v('raw-sc') - mn) / sd;
-    } else { zma=v('z-ma'); zrc=v('z-rc'); zlp=v('z-lp'); zsc=v('z-sc'); }
+    } else {
+      zma = v('z-ma'); zrc = v('z-rc'); zlp = v('z-lp'); zsc = v('z-sc');
+    }
 
     const g8=v('g8'), g9=v('g9'), g10=v('g10'), g11=v('g11');
-    const hswa = (g8+g9+g10+g11)/4;
+    const hswa = (g8+g9+g10+g11) / 4;
     const zhs  = (hswa - 85) / 5;
     document.getElementById('hswa-display').textContent = hswa.toFixed(2);
     document.getElementById('zhswa-display').textContent = (zhs>=0?'+':'')+zhs.toFixed(3);
 
     let upg = 2.8101
-      - 0.047147*zma
-      - 0.046402*zrc
-      - 0.1381  *zlp
-      - 0.15531 *zhs
-      - 0.025178*zsc*zlp*zhs;
+      - 0.047147 * zma
+      - 0.046402 * zrc
+      - 0.1381   * zlp
+      - 0.15531  * zhs
+      - 0.025178 * zsc * zlp * zhs;
 
     let adj = 0;
     if (document.getElementById('palugit').checked) adj -= 0.05;
@@ -375,12 +462,15 @@
 
     const zVals=[{l:'Z_MA',v:zma},{l:'Z_RC',v:zrc},{l:'Z_LP',v:zlp},{l:'Z_SC',v:zsc},{l:'Z_HSWA',v:zhs}];
     document.getElementById('breakdown').innerHTML = zVals.map(z=>{
-      const cls=z.v>0?'pos':z.v<0?'neg':'';
-      return `<div class="z-chip"><div class="z-chip-label">${z.l}</div><div class="z-chip-val ${cls}">${z.v>=0?'+':''}${z.v.toFixed(3)}</div></div>`;
+      const {str,cls} = fmtZ(z.v);
+      return `<div class="z-chip"><div class="z-chip-label">${z.l}</div><div class="z-chip-val ${cls}">${str}</div></div>`;
     }).join('');
-    document.getElementById('adj-display').innerHTML = adj!==0
+
+    document.getElementById('adj-display').innerHTML = adj !== 0
       ? `<div class="adj-row"><span>EEAS adjustment</span><span style="color:${adj<0?'var(--success)':'var(--danger)'};">${adj>0?'+':''}${adj.toFixed(2)}</span></div>` : '';
   }
+
   compute();
 </script>
 </body>
+</html>
